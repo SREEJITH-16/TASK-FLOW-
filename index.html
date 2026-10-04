@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TaskFlow – Stay organized, stay productive</title>
+<meta name="description" content="A fast, private task manager that works offline.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=localStorage.getItem('todo_app_theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+    <div><h1>TaskFlow</h1><p class="tagline">Stay organized, stay productive.</p></div>
+  </div>
+  <div class="top-actions">
+    <button id="themeToggle" class="icon-btn" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+      <svg class="i-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <button id="addTaskBtn" class="btn primary" type="button" title="Shortcut: N" aria-label="Add task">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      <span>Add Task</span>
+    </button>
+  </div>
+</header>
+
+<div class="layout">
+  <main class="main">
+    <section class="hero">
+      <h2 id="greeting">Hello!</h2>
+      <p id="subGreeting" class="muted"></p>
+    </section>
+
+    <section class="stats" aria-label="Task statistics">
+      <div class="stat"><strong id="statTotal">0</strong><span>Total</span></div>
+      <div class="stat"><strong id="statActive">0</strong><span>Active</span></div>
+      <div class="stat"><strong id="statDone">0</strong><span>Completed</span></div>
+      <div class="stat"><strong id="statOverdue">0</strong><span>Overdue</span></div>
+    </section>
+
+    <div class="search">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <label for="searchInput" class="sr-only">Search tasks</label>
+      <input id="searchInput" type="search" placeholder="Search tasks…" autocomplete="off">
+    </div>
+
+    <div class="toolbar">
+      <div class="pills" id="statusFilters" role="group" aria-label="Filter by status">
+        <button type="button" class="pill active" data-status="all" aria-pressed="true">All <span class="count" id="cntAll">0</span></button>
+        <button type="button" class="pill" data-status="active" aria-pressed="false">Active <span class="count" id="cntActive">0</span></button>
+        <button type="button" class="pill" data-status="completed" aria-pressed="false">Completed <span class="count" id="cntDone">0</span></button>
+      </div>
+      <div class="bulk">
+        <button type="button" id="markAllBtn" class="btn ghost">Mark all done</button>
+        <button type="button" id="clearDoneBtn" class="btn ghost">Clear completed</button>
+      </div>
+    </div>
+
+    <ul id="taskList" class="task-list"></ul>
+    <div id="emptyState" class="empty" hidden></div>
+  </main>
+
+  <aside class="side">
+    <section class="panel progress-panel" aria-label="Progress">
+      <div class="ring">
+        <svg viewBox="0 0 120 120" width="130" height="130" aria-hidden="true">
+          <circle class="ring-bg" cx="60" cy="60" r="52"/>
+          <circle id="ringFg" class="ring-fg" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="ring-label"><strong id="percent">0%</strong><span>Complete</span></div>
+      </div>
+      <p id="progressText" class="muted center"></p>
+    </section>
+
+    <section class="panel">
+      <h3>Priority</h3>
+      <div class="opt-list" id="priorityFilters" role="group" aria-label="Filter by priority">
+        <button type="button" class="opt active" data-priority="all" aria-pressed="true"><i class="dot all"></i>All priorities</button>
+        <button type="button" class="opt" data-priority="high" aria-pressed="false"><i class="dot high"></i>High</button>
+        <button type="button" class="opt" data-priority="medium" aria-pressed="false"><i class="dot medium"></i>Medium</button>
+        <button type="button" class="opt" data-priority="low" aria-pressed="false"><i class="dot low"></i>Low</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h3><label for="sortSelect">Sort by</label></h3>
+      <select id="sortSelect" class="field-control">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+        <option value="due">Due date</option>
+        <option value="priority">Priority</option>
+      </select>
+    </section>
+  </aside>
+</div>
+
+<!-- Task modal -->
+<div id="taskModal" class="overlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="close" data-close aria-label="Close dialog">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <form id="taskForm" novalidate>
+      <div class="modal-head">
+        <span class="badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <div><h2 id="modalTitle">Add New Task</h2><p id="modalSub" class="muted">Create a new task to stay organized</p></div>
+      </div>
+      <div class="field">
+        <div class="field-row"><label for="titleInput">Task title <span class="req" aria-hidden="true">*</span></label><small id="titleCount">0/100</small></div>
+        <input id="titleInput" class="field-control" maxlength="100" placeholder="Enter task title…" autocomplete="off" aria-describedby="titleError" required>
+        <p id="titleError" class="error" role="alert" hidden></p>
+      </div>
+      <div class="field">
+        <div class="field-row"><label for="descInput">Description <span class="muted">(optional)</span></label><small id="descCount">0/300</small></div>
+        <textarea id="descInput" class="field-control" rows="3" maxlength="300" placeholder="Add more details about this task…"></textarea>
+      </div>
+      <div class="grid2">
+        <div class="field"><label for="priorityInput">Priority</label>
+          <select id="priorityInput" class="field-control"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
+        <div class="field"><label for="dueInput">Due date</label><input id="dueInput" type="date" class="field-control"></div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn secondary" data-close>Cancel</button>
+        <button type="submit" id="submitBtn" class="btn primary">Add Task</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Confirm modal -->
+<div id="confirmModal" class="overlay" hidden>
+  <div class="modal small" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmText">
+    <h2 id="confirmTitle">Delete task?</h2>
+    <p id="confirmText" class="muted"></p>
+    <div class="modal-foot">
+      <button type="button" class="btn secondary" id="confirmCancel">Cancel</button>
+      <button type="button" class="btn danger" id="confirmOk">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+<script src="script.js"></script>
+</body>
+</html>
