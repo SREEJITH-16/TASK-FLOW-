@@ -1,17 +1,24 @@
-# ✦ TaskFlow
+<div align="center">
 
-> A modern, fast, private task manager built with vanilla JavaScript — designed to keep your day organized without accounts, servers, or distractions.
+<a href="https://taskflow-psi-pink.vercel.app/">
+  <img src="https://readme-typing-svg.demolab.com?font=Space+Grotesk&weight=700&size=38&duration=2800&pause=900&color=2563EB&center=true&vCenter=true&width=760&lines=Welcome+to+TaskFlow;Plan+%E2%80%A2+Organize+%E2%80%A2+Get+Things+Done;Simple+Tasks.+Clear+Progress.+Better+Focus." alt="TaskFlow animated heading" />
+</a>
 
-<p align="center">
+<p>
+  <strong>A modern, fast and private task manager built with Vanilla JavaScript.</strong><br>
+  Organize your work, track progress and keep your tasks persistent — entirely in your browser.
+</p>
+
+<p>
   <a href="https://taskflow-psi-pink.vercel.app/">
-    <img src="https://img.shields.io/badge/Live%20Demo-TaskFlow-2563EB?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo">
+    <img src="https://img.shields.io/badge/%E2%96%B6%20LIVE%20DEMO-2563EB?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo">
   </a>
   <a href="https://github.com/SREEJITH-16/TASK-FLOW-">
-    <img src="https://img.shields.io/badge/Source%20Code-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="Source Code">
+    <img src="https://img.shields.io/badge/%E2%98%85%20SOURCE%20CODE-181717?style=for-the-badge&logo=github&logoColor=white" alt="Source Code">
   </a>
 </p>
 
-<p align="center">
+<p>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" alt="HTML5">
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" alt="CSS3">
   <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=111111" alt="JavaScript">
@@ -19,11 +26,17 @@
   <img src="https://img.shields.io/badge/Responsive-Yes-7C3AED?style=flat-square" alt="Responsive">
 </p>
 
+</div>
+
 ---
 
 ## 🚀 Live Demo
 
-### [→ Open TaskFlow](https://taskflow-psi-pink.vercel.app/)
+<div align="center">
+
+### <a href="https://taskflow-psi-pink.vercel.app/">✨ Open TaskFlow →</a>
+
+</div>
 
 TaskFlow runs entirely in the browser, so your tasks stay available across page refreshes without requiring an account or backend.
 
@@ -46,13 +59,14 @@ It combines a clean productivity dashboard with practical task-management featur
 - 🔔 Toast notifications and undo actions
 - ♿ Accessible keyboard and focus interactions
 
-No account. No server. No database. Just open it and start managing your tasks.
+> **No account. No server. No database.** Just open it and start managing your tasks.
 
 ---
 
 ## 🎯 Features
 
 ### Task Management
+
 - Create tasks with title, description, priority, and due date
 - Edit existing tasks
 - Mark tasks as completed or active
@@ -61,18 +75,16 @@ No account. No server. No database. Just open it and start managing your tasks.
 - Mark all active tasks as completed
 
 ### Smart Organization
+
 - **All** tasks
 - **Active** tasks
 - **Completed** tasks
 - Search by task title or description
 - Filter by **High / Medium / Low** priority
-- Sort by:
-  - Newest first
-  - Oldest first
-  - Due date
-  - Priority
+- Sort by newest, oldest, due date, or priority
 
 ### Progress Dashboard
+
 TaskFlow automatically calculates:
 
 | Metric | Description |
@@ -89,15 +101,13 @@ The progress ring and counters update automatically whenever task state changes.
 
 Tasks are stored locally using the browser's `localStorage` API.
 
-That means:
-
 - Data survives browser refreshes
 - Data remains after closing and reopening the browser
 - No login is required
 - No backend is required
 - The app can work without a server after it has loaded
 
-Storage keys used by the application:
+Storage keys:
 
 ```text
 todo_app_tasks
@@ -106,8 +116,6 @@ todo_app_theme
 
 ### 🌗 Theme Support
 
-TaskFlow supports:
-
 - Light mode
 - Dark mode
 - System theme preference on first visit
@@ -115,23 +123,13 @@ TaskFlow supports:
 
 ### 🔔 Notifications
 
-The built-in toast system provides feedback for actions such as:
-
-- Task added
-- Task updated
-- Task completed
-- Task deleted
-- Completed tasks cleared
-
-Deleting a task also supports an **Undo** action.
+The built-in toast system provides feedback for actions such as task creation, editing, completion and deletion. Deleting a task also supports an **Undo** action.
 
 ---
 
 ## 🎨 UI & UX
 
 TaskFlow is designed around a modern productivity-dashboard experience.
-
-### Design characteristics
 
 - Clean visual hierarchy
 - Soft cards and borders
@@ -143,14 +141,13 @@ TaskFlow is designed around a modern productivity-dashboard experience.
 - Modal-based task creation/editing
 - Mobile-friendly controls
 - Accessible focus states
-
-The interface intentionally stays lightweight while still providing a polished product-like experience.
+- Reduced-motion support
 
 ---
 
 ## 🧠 JavaScript & State Management
 
-The application keeps a single client-side state object containing:
+The application keeps a client-side state object containing:
 
 ```js
 {
@@ -177,13 +174,11 @@ Task objects follow a structure similar to:
 }
 ```
 
-The UI is then rendered from the current state, keeping the interface synchronized with stored data.
+The UI is rendered from the current state, keeping the interface synchronized with stored data.
 
 ---
 
 ## 🧩 Core JavaScript Architecture
-
-The application is organized around reusable functions for:
 
 ```text
 Storage
@@ -219,17 +214,17 @@ Dynamic task elements are created with JavaScript rather than hardcoded individu
 
 ## ⚡ Event Delegation
 
-Task actions use event delegation on the task list.
-
-This keeps event handling efficient even when the task list is dynamically rebuilt.
+Task actions use event delegation on the task list. This keeps event handling efficient even when the task list is dynamically rebuilt.
 
 Examples include:
 
 - Complete / uncomplete
 - Edit
 - Delete
-
-The application also uses event-driven updates for filters, search, sorting, theme switching, modal controls, and keyboard shortcuts.
+- Dynamic filter interactions
+- Search and sorting
+- Modal controls
+- Theme switching
 
 ---
 
@@ -248,13 +243,7 @@ TaskFlow includes accessibility-focused interactions such as:
 
 ### Keyboard shortcut
 
-Press:
-
-```text
-N
-```
-
-to open the **Add Task** dialog when you are not typing inside a form control.
+Press **`N`** to open the **Add Task** dialog when you are not typing inside a form control.
 
 ---
 
@@ -304,23 +293,40 @@ TASK-FLOW-/
 
 ## 🛠️ Tech Stack
 
-### Frontend
+| Technology | Purpose |
+|---|---|
+| **HTML5** | Semantic application structure |
+| **CSS3** | Responsive layout, themes, transitions and animations |
+| **Vanilla JavaScript** | Logic, state management and DOM manipulation |
+| **localStorage** | Client-side persistence |
+| **Vercel** | Static deployment |
 
-- **HTML5** — semantic application structure
-- **CSS3** — responsive layout, themes, transitions and animations
-- **Vanilla JavaScript (ES6+)** — application logic and state management
+---
 
-### Browser APIs
+## 🔄 Application Flow
 
-- `localStorage`
-- `crypto.randomUUID()`
-- `matchMedia()`
-- DOM APIs
-- Browser events
-
-### Deployment
-
-- Vercel
+```text
+             ┌──────────────┐
+             │  User Action │
+             └──────┬───────┘
+                    ↓
+             ┌──────────────┐
+             │ Update State │
+             └──────┬───────┘
+                    ↓
+             ┌──────────────┐
+             │ localStorage │
+             └──────┬───────┘
+                    ↓
+             ┌──────────────┐
+             │ Re-render UI │
+             └──────┬───────┘
+                    ↓
+             ┌──────────────┐
+             │  Persistent  │
+             │    State     │
+             └──────────────┘
+```
 
 ---
 
@@ -328,75 +334,28 @@ TASK-FLOW-/
 
 TaskFlow does not require a build tool or package installation.
 
-### Option 1 — Open directly
-
-Clone the repository:
-
 ```bash
 git clone https://github.com/SREEJITH-16/TASK-FLOW-.git
 cd TASK-FLOW-
 ```
 
-Then open:
-
-```text
-index.html
-```
-
-in your browser.
-
-### Option 2 — Use a local development server
-
-With VS Code, open the folder and launch `index.html` using a local server such as Live Server.
+Then open `index.html` in your browser, or use VS Code Live Server for local development.
 
 ---
 
 ## 🌐 Deployment
 
-Because TaskFlow is a static frontend application, it can be deployed easily to services such as Vercel, Netlify, or GitHub Pages.
-
-### Vercel
-
-1. Import the GitHub repository
-2. Select the project
-3. No build command is required
-4. Deploy
+Because TaskFlow is a static frontend application, it can be deployed easily to Vercel, Netlify, GitHub Pages, or similar static hosting platforms.
 
 ### Live Deployment
 
-**https://taskflow-psi-pink.vercel.app/**
+<div align="center">
 
----
+<a href="https://taskflow-psi-pink.vercel.app/">
+  <img src="https://img.shields.io/badge/OPEN%20LIVE%20APP-2563EB?style=for-the-badge&logo=vercel&logoColor=white" alt="Open Live App">
+</a>
 
-## 🔄 Application Flow
-
-```text
-User Action
-     ↓
-Update State
-     ↓
-Save to localStorage
-     ↓
-Re-render UI
-     ↓
-Refresh-safe persistent state
-```
-
-For example:
-
-```text
-Add Task
-   ↓
-Create task object
-   ↓
-Insert into state.tasks
-   ↓
-saveTasks()
-   ↓
-render()
-   ↓
-Updated dashboard
-```
+</div>
 
 ---
 
@@ -433,15 +392,11 @@ Updated dashboard
   </a>
 </p>
 
-> Replace the preview image above with a real screenshot of the deployed application whenever you have one available.
-
 ---
 
 ## 🔐 Privacy
 
-TaskFlow is designed around client-side storage.
-
-There is no application account system or remote task database. Task data is stored in the browser through `localStorage`.
+TaskFlow is designed around client-side storage. There is no application account system or remote task database. Task data is stored in the browser through `localStorage`.
 
 Clearing the site's browser storage will remove locally stored tasks.
 
@@ -458,8 +413,6 @@ Clearing the site's browser storage will remove locally stored tasks.
 
 ## 💡 Possible Future Enhancements
 
-Potential improvements for future versions include:
-
 - Drag-and-drop task ordering
 - Recurring tasks
 - Calendar view
@@ -472,7 +425,10 @@ Potential improvements for future versions include:
 
 ---
 
-<p align="center">
-  <strong>TaskFlow</strong><br>
-  Simple tasks. Clear progress. Better focus.
-</p>
+<div align="center">
+
+<img src="https://readme-typing-svg.demolab.com?font=Space+Grotesk&weight=600&size=20&duration=3200&pause=1000&color=64748B&center=true&vCenter=true&width=600&lines=Plan+your+day.;Track+your+progress.;Finish+what+matters." alt="TaskFlow animated tagline" />
+
+**TaskFlow** · Simple tasks. Clear progress. Better focus.
+
+</div>
